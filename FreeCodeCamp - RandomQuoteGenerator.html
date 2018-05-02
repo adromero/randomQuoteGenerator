@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>CodePen - Random Quote Generator 0.5 (adding bootstrap)</title>
+  
+  
+  
+  
+      <style>
+      * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+}
+
+div {
+  position: relative;
+  z-index: 2;
+}
+
+body {
+  background-color: #000000;
+  color: #000000;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  background-color: #000000;
+	color: #888;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 400;
+  border-radius: 8px;
+  position: relative;
+  margin: 8% auto auto auto;
+  padding: 40px 50px;
+  display: table;
+}
+
+.container .quote-text {
+  text-align: center;
+  height: auto;
+  clear: both;
+  font-weight: 500;
+  font-size: 1.75em;
+}
+
+.container .quote-author {
+  height: auto;
+  clear: both;
+  padding-top: 20px;
+  font-size: 1em;
+  text-align: right;
+}
+
+.container .buttons {
+  margin: auto;
+	padding-top: 20px;
+  display: block;
+  opacity: 0.5;
+}
+.container .buttons .button {
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #333;
+  outline: none;
+  font-size: 1em;
+  padding: 8px 18px 6px 18px;
+  margin-top: 10px;
+  opacity: 1;
+  cursor: pointer;
+}
+.container .buttons .button:hover {
+  opacity: 0.6;
+}
+.container .buttons .button#tweet-quote, .container .buttons .button#tumblr-quote {
+  float: left;
+  padding: 0px;
+  padding-top: 8px;
+  text-align: center;
+  font-size: 1.5em;
+  margin-right: 5px;
+  height: 40px;
+  width: 30px;
+}
+.container .buttons .button#new-quote {
+  float: right;
+  background-color: #777;
+}
+
+.footer {
+  width: 450px;
+  text-align: center;
+  display: block;
+  margin: 15px auto 30px auto;
+  font-size: 0.8em;
+  color: #fff;
+}
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Random Quote Generator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+</head>
+<body>
+  <div class = "container">
+    <div class="row">
+			<div class="col-sm-12">
+				<div class= "quote-text">
+      		<span id="text"></span>
+			</div></div></div>
+		<div class="row">
+			<div class="col-sm-12">
+    <div class="quote-author">
+      <span id="author"> - </span>
+				</div></div></div>
+		<div class="row">
+    		<div class="buttons">
+					<div class="col-sm-4">
+      		<a class="button" id="tweet-quote" title="Tweet this quote!" target="_blank">
+        		<i class="fa fa-twitter"></i>
+						</a>
+      		<a class="button" id="tumblr-quote" title="Post this quote on tumblr!" target="_blank">
+        		<i class="fa fa-tumblr"></i>
+						</a></div>
+					<div class="col-sm-8">
+      		<button class="button" id="new-quote">New quote</button>
+				</div></div></div>
+  </div>
+  <div class="footer"> by <a href="https://www.freecodecamp.org/adromero">adromero</a></div>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+  </body>
+</html>
+    <script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+
+  
+  
+
+    <script >
+      function inIframe () { try { return window.self !== window.top; } catch (e) { return true; } }
+
+var currentQuote = '', currentAuthor = '';
+function openURL(url){
+  window.open(url, 'Share', 'width=550, height=400, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=0');
+}
+
+// Randomly selects quote function
+
+function getQuote() {
+
+	var funcSelect = [stockFunc, oldFunc, duneFunc, priceFunc];
+	funcSelect[Math.floor(Math.random() * funcSelect.length)]();
+	//oldFunc();
+}
+	
+// Retrieves and displays: currentQuote = date and price, currentAuthor =  ticker symbol 
+
+function stockFunc() {
+	
+	var arrSymbols = ["MMM","AXP","AAPL","BA","CAT","CVX","CSCO","KO","DIS","DWDP","XOM","GE","GS","HD","IBM","INTC","JNJ","JPM","MCD","MRK","MSFT","NKE","PFE","PG","TRV","UTX","UNH","VZ","V","WMT"];
+	var inputSymbol = arrSymbols[Math.floor(Math.random() * arrSymbols.length)];
+			
+	var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + inputSymbol + "&interval=1min&apikey=0PQEITA3TYO48601";
+	
+	$.ajax({
+		url:url,
+  	dataType: 'json',
+    contentType: "application/json",
+		success: function(data) {
+		var symbol = data['Meta Data']['2. Symbol'];
+		var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+    var lastTradePriceOnly = data['Time Series (1min)'][lastRefreshed]['4. close'];
+		currentQuote = "Date and Time: " + lastRefreshed +  "\n Last Trade Price: " + lastTradePriceOnly;
+		currentAuthor = symbol;
+		
+		tweetAndAnimate();	
+		}
+		});
+}
+
+// Retrieves and displays random wikiquotes from Dune page
+
+function duneFunc() {
+	WikiquoteApi.getRandomQuote("Dune", function(data) {
+        console.log(data);
+  currentQuote = data.quote;
+	currentAuthor = data.titles;
+			tweetAndAnimate();	
+		});
+		}
+
+// Randomizes silly price quotes
+
+function priceFunc() {
+	priceObj = ["car","house","cat","dog","stock portfolio","boat","graphics card","bitcoin","computer","hourly wage","blood plasma","kidney"]
+	priceNum = Math.floor(Math.random()*1000+1);
+	authObj = ["The Quote Guy", "Insurance Appraiser", "Used Car Salesman", "Antique Roadshow Host","Pawn Shop Owner","Magical Leprechaun","Evil Witch","Your brother-in-law"]
+	priceCur = ["dollars", "yen", "euros", "goats", "yuan", "pesos","bitcoin","cents","gold coins","Zuckerbergs"]
+	currentQuote = "Your " + priceObj[Math.floor(Math.random() * priceObj.length)] +  " is worth " + priceNum + " " + priceCur[Math.floor(Math.random() * priceCur.length)];
+	currentAuthor = authObj[Math.floor(Math.random() * authObj.length)];
+	tweetAndAnimate();
+		}
+
+	// this is the old function
+function oldFunc() {
+	$.ajax({
+    headers: {
+      "X-Mashape-Key": "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=',
+    success: function(r) {
+      if (typeof r === 'string') {
+       r = JSON.parse(r); 
+      }
+      currentQuote = r.quote;
+      currentAuthor = r.author;
+      tweetAndAnimate();
+        }
+    });
+  }
+
+// On click
+
+$(document).ready(function() {
+  getQuote();
+  $('#new-quote').on('click', getQuote);
+  $('#tweet-quote').on('click', function() {
+    if(!inIframe()) {
+      openURL('https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+    }
+  });
+  $('#tumblr-quote').on('click', function() {
+    if(!inIframe()) {
+      openURL('https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption='+encodeURIComponent(currentAuthor)+'&content=' + encodeURIComponent(currentQuote)+'&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button');
+    }
+  });
+});
+      //# sourceURL=pen.js
+
+// Sets up the twits and tums and anims 
+
+function tweetAndAnimate() {
+		if(inIframe())
+		  {
+			$('#tweet-quote').attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" -' + currentAuthor));
+			$('#tumblr-quote').attr('href', 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption='+encodeURIComponent(currentAuthor)+'&content=' + encodeURIComponent(currentQuote)+'&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button');
+		  }
+		$(".quote-text").animate({
+			opacity: 0
+			}, 500,
+		function() {
+			$(this).animate({
+				opacity: 1
+			}, 500);
+			$('#text').text(currentQuote);
+			});
+		$(".quote-author").animate({
+			opacity: 0
+			}, 500,
+		function() {
+			$(this).animate({
+				opacity: 1
+			}, 500);
+			$('#author').html(currentAuthor);
+			});
+		}
+
+//
+// WikiquoteApi thanks to Nate Tyler. https://github.com/natetyler/wikiquotes-api
+//
+
+var WikiquoteApi = (function() {
+
+  var wqa = {};
+
+  var API_URL = "https://en.wikiquote.org/w/api.php";
+
+  wqa.queryTitles = function(titles, success, error) {
+    $.ajax({
+      url: API_URL,
+      dataType: "jsonp",
+      data: {
+        format: "json",
+        action: "query",
+        redirects: "",
+        titles: titles
+      },
+
+      success: function(result, status) {
+        var pages = result.query.pages;
+        var pageId = -1;
+        for(var p in pages) {
+          var page = pages[p];
+          if(!("missing" in page)) {
+            pageId = page.pageid;
+            break;
+          }
+        }
+        if(pageId > 0) {
+          success(pageId);
+        } else {
+          error("No results");
+        }
+      },
+
+      error: function(xhr, result, status){
+        error("Error processing your query");
+      }
+    });
+  };
+
+  wqa.queryRandomTitle = function(success, error) {
+    $.ajax({
+      url: API_URL,
+      dataType: "jsonp",
+      data: {
+        format: "json",
+        action: "query",
+        redirects: "",
+        list: "random",
+        rnnamespace: "0"
+      },
+
+      success: function(result, status) {
+        var title = result.query.random[0].title;
+        if(title !== undefined) {
+          success(title);
+        } else {
+          error("No results");
+        }
+      },
+
+      error: function(xhr, result, status){
+        error("Error processing your query");
+      }
+    });
+  };
+
+  wqa.getSectionsForPage = function(pageId, success, error) {
+    $.ajax({
+      url: API_URL,
+      dataType: "jsonp",
+      data: {
+        format: "json",
+        action: "parse",
+        prop: "sections",
+        pageid: pageId
+      },
+
+      success: function(result, status){
+        var sectionArray = [];
+        var sections = result.parse.sections;
+        for(var s in sections) {
+          var splitNum = sections[s].number.split('.');
+          if(splitNum.length > 1 && splitNum[0] === "1") {
+            sectionArray.push(sections[s].index);
+          }
+        }
+        if(sectionArray.length === 0) {
+          sectionArray.push("1");
+        }
+        success({ titles: result.parse.title, sections: sectionArray });
+      },
+      error: function(xhr, result, status){
+        error("Error getting sections");
+      }
+    });
+  };
+
+  wqa.getQuotesForSection = function(pageId, sectionIndex, success, error) {
+    $.ajax({
+      url: API_URL,
+      dataType: "jsonp",
+      data: {
+        format: "json",
+        action: "parse",
+        noimages: "",
+        pageid: pageId,
+        section: sectionIndex
+      },
+
+      success: function(result, status){
+        var quotes = result.parse.text["*"];
+        var quoteArray = [];
+
+        var $lis = $(quotes).find('li:not(li li)');
+        $lis.each(function() {
+          $(this).children().remove(':not(b)');
+          var $bolds = $(this).find('b');
+
+          if($bolds.length > 0) {
+            quoteArray.push($bolds.html());
+          } else {
+            quoteArray.push($(this).html());
+          }
+        });
+        success({ titles: result.parse.title, quotes: quoteArray });
+      },
+      error: function(xhr, result, status){
+        error("Error getting quotes");
+      }
+    });
+  };
+
+  wqa.openSearch = function(titles, success, error) {
+    $.ajax({
+      url: API_URL,
+      dataType: "jsonp",
+      data: {
+        format: "json",
+        action: "opensearch",
+        namespace: 0,
+        suggest: "",
+        search: titles
+      },
+
+      success: function(result, status){
+        success(result[1]);
+      },
+      error: function(xhr, result, status){
+        error("Error with opensearch for " + titles);
+      }
+    });
+  };
+
+  wqa.getRandomQuote = function(titles, success, error) {
+
+    var errorFunction = function(msg) {
+      error(msg);
+    };
+
+    var chooseQuote = function(quotes) {
+      var randomNum = Math.floor(Math.random()*quotes.quotes.length);
+      success(
+         { titles: quotes.titles, quote: quotes.quotes[randomNum] }
+      );
+    };
+
+    var getQuotes = function(pageId, sections) {
+      var randomNum = Math.floor(Math.random()*sections.sections.length);
+      wqa.getQuotesForSection(pageId, sections.sections[randomNum], chooseQuote, errorFunction);
+    };
+
+    var getSections = function(pageId) {
+      wqa.getSectionsForPage(pageId, function(sections) { getQuotes(pageId, sections); }, errorFunction);
+    };
+
+    wqa.queryTitles(titles, getSections, errorFunction);
+  };
+
+  wqa.getCompletelyRandomQuote = function(success, error) {
+      wqa.queryRandomTitle(function(title) {
+          wqa.getRandomQuote(title, success, error);
+      }, error);
+  };
+
+  wqa.capitalizeString = function(input) {
+    var inputArray = input.split(' ');
+    var output = [];
+    for(s in inputArray) {
+      output.push(inputArray[s].charAt(0).toUpperCase() + inputArray[s].slice(1));
+    }
+    return output.join(' ');
+  };
+
+  return wqa;
+}());
+      //# sourceURL=pen.js
+    </script>
+
+
+
+  
+  
+
+</body>
+
+</html>
